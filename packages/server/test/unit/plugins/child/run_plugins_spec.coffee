@@ -10,11 +10,9 @@ runPlugins = require("#{root}../../lib/plugins/child/run_plugins")
 util = require("#{root}../../lib/plugins/util")
 Fixtures = require("#{root}../../test/support/helpers/fixtures")
 
-colorCodeRe = /\[[0-9;]+m/gm
 pathRe = /\/?([a-z0-9_-]+\/)*[a-z0-9_-]+\/([a-z_]+\.\w+)[:0-9]+/gmi
 
 withoutStack = (err) -> _.omit(err, "stack")
-withoutColorCodes = (str) -> str.replace(colorCodeRe, "<color-code>")
 withoutPath = (str) -> str.replace(pathRe, '<path>$2)')
 
 describe "lib/plugins/child/run_plugins", ->
@@ -53,7 +51,7 @@ describe "lib/plugins/child/run_plugins", ->
     )
     runPlugins(@ipc, "plugins-file")
     expect(@ipc.send).to.be.calledWith("load:error", "PLUGINS_FILE_ERROR", "plugins-file")
-    snapshot(withoutColorCodes(withoutPath(@ipc.send.lastCall.args[3])))
+    snapshot(withoutPath(@ipc.send.lastCall.args[3]))
 
   it "sends error message if pluginsFile does not export a function", ->
     mockery.registerMock("plugins-file", null)

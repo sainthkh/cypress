@@ -8,8 +8,8 @@ Error: error thrown by pluginsFile
 
 exports['lib/plugins/child/run_plugins sends error message if pluginsFile has syntax error 1'] = `
 <path>syntax_error.coffee) error: missing }
-<color-code>{<color-code>
-<color-code>^<color-code>
+{
+^
 `
 
 exports['lib/plugins/child/run_plugins sends error message if pluginsFile does not export a function 1'] = `
