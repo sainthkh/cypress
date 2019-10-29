@@ -9,7 +9,7 @@ Cypress binary version: not installed
 `
 
 exports['cli cypress run warns with space-separated --specs 1'] = `
-[33m⚠[39m Warning: It looks like you're passing --spec a space-separated list of files:
+⚠ Warning: It looks like you're passing --spec a space-separated list of files:
 
 "a b c d e f g"
 

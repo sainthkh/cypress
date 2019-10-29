@@ -16,7 +16,7 @@ Install Xvfb and run Cypress again.
 
 Read our documentation on dependencies for more information:
 
-[34mhttps://on.cypress.io/required-dependencies[39m
+https://on.cypress.io/required-dependencies
 
 If you are using Docker, we provide containers with all required dependencies installed.
 
@@ -62,7 +62,7 @@ This is usually caused by a missing library or dependency.
 
 The error above should indicate which dependency is missing.
 
-[34mhttps://on.cypress.io/required-dependencies[39m
+https://on.cypress.io/required-dependencies
 
 If you are using Docker, we provide containers with all required dependencies installed.
 
