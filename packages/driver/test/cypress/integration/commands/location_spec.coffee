@@ -259,6 +259,20 @@ describe "src/cy/commands/location", ->
 
       cy.location().should("have.property", "pathname").and("match", /users/)
 
+    describe "pathname", -> 
+      it "location() and location.pathname works", ->
+        cy.location().should((location) -> 
+          expect(location.pathname).to.eq("/fixtures/generic.html")
+        )
+      
+      it "window() and window.location.pathname works", ->
+        cy.window().then((win) -> 
+          expect(win.location.pathname).to.eq("/fixtures/generic.html")
+        )
+
+      it "location('pathname').should('eq', value)", ->
+        cy.location("pathname").should("eq", "/fixtures/generic.html")
+
     describe "assertion verification", ->
       beforeEach ->
         cy.on "log:added", (attrs, log) =>
