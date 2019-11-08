@@ -7,6 +7,59 @@
 ## desktop-gui -> 
 - [ ] /cypress/support/index
 
+## electron
+### lib/
+- [ ] electron
+- [ ] install
+- [ ] paths
+### test/
+- [ ] electron_spec
+
+## example -> none
+
+## extension
+### app/
+- [ ] background
+### lib/
+- [ ] extension
+### test/
+- [ ] integration/background_spec
+- [ ] unit/extension_spec
+- [ ] spec_helper
+
+## http-proxy 
+- [ ] spec_helper
+### helpers/
+- [ ] certs
+- [ ] http_server
+- [ ] https_server
+- [ ] proxy
+### integration/
+- [ ] proxy_spec
+### unit/
+- [ ] ca_spec
+- [ ] server_spec
+
+## launcher
+- [ ] test/spec_helper
+
+## network -> None
+
+## reporter
+- [ ] cypress/integration/aliases_spec
+
+## root -> None
+
+## runner -> None
+
+## socket -> None
+
+## static -> None
+
+## ts -> None
+
+## web-config -> None
+
 ## driver
 ### src/config
 - [ ] bluebird
@@ -88,57 +141,4 @@
 
 ### test/ TBA
 
-## electron
-### lib/
-- [ ] electron
-- [ ] install
-- [ ] paths
-### test/
-- [ ] electron_spec
-
-## example -> none
-
-## extension
-### app/
-- [ ] background
-### lib/
-- [ ] extension
-### test/
-- [ ] integration/background_spec
-- [ ] unit/extension_spec
-- [ ] spec_helper
-
-## http-proxy 
-- [ ] spec_helper
-### helpers/
-- [ ] certs
-- [ ] http_server
-- [ ] https_server
-- [ ] proxy
-### integration/
-- [ ] proxy_spec
-### unit/
-- [ ] ca_spec
-- [ ] server_spec
-
-## launcher
-- [ ] test/spec_helper
-
-## network -> None
-
-## reporter
-- [ ] cypress/integration/aliases_spec
-
-## root -> None
-
-## runner -> None
-
 ## server TBA
-
-## socket -> None
-
-## static -> None
-
-## ts -> None
-
-## web-config -> None
