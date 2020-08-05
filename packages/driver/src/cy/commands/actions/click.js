@@ -156,6 +156,8 @@ module.exports = (Commands, Cypress, cy, state, config) => {
 
           const forceEl = options.force && $elToClick.get(0)
 
+          console.log('mouse.click')
+
           const moveEvents = mouse.move(fromElViewport, forceEl)
 
           const onReadyProps = onReady(fromElViewport, forceEl)

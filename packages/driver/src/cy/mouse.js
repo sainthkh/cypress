@@ -723,6 +723,7 @@ const sendEvent = (evtName, el, evtOptions, bubbles = false, cancelable = false,
 
   debug('event:', evtName, el)
 
+  console.log(evtName)
   const preventedDefault = !el.dispatchEvent(evt)
 
   return {
