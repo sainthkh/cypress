@@ -59,6 +59,7 @@ export const InterceptResponse: ResponseMiddleware = async function () {
   const res = _.extend(_.pick(this.incomingRes, SERIALIZABLE_RES_PROPS), {
     url: this.req.proxiedUrl,
     body,
+    cypressInternalResReplyCall: this.req.cypressInternalResReplyCall,
   }) as CyHttpMessages.IncomingResponse
 
   if (!_.isString(res.body) && !_.isBuffer(res.body)) {

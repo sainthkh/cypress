@@ -11,7 +11,9 @@ export type FixtureOpts = {
   filePath: string
 }
 
-export type BackendStaticResponse = GenericStaticResponse<FixtureOpts, string>
+export type BackendStaticResponse = GenericStaticResponse<FixtureOpts, string> & {
+  cypressInternalResReplyCall?: boolean
+}
 
 export type BackendStaticResponseWithArrayBuffer = GenericStaticResponse<FixtureOpts, string | ArrayBuffer>
 

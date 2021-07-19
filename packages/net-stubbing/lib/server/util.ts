@@ -175,7 +175,7 @@ export async function sendStaticResponse (backendRequest: Pick<InterceptedReques
 
   const bodyStream = await getBodyStream(body, _.pick(staticResponse, 'throttleKbps', 'delay'))
 
-  onResponse!(incomingRes, bodyStream)
+  onResponse!(incomingRes, bodyStream, staticResponse.cypressInternalResReplyCall)
 }
 
 export async function getBodyStream (body: Buffer | string | Readable | undefined, options: { delay?: number, throttleKbps?: number }): Promise<Readable> {

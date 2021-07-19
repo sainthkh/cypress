@@ -12,6 +12,7 @@ export type CypressIncomingRequest = Request & {
   body?: string
   responseTimeout?: number
   followRedirect?: boolean
+  cypressInternalResReplyCall?: boolean
 }
 
 /**

@@ -2184,6 +2184,25 @@ describe('network stubbing', { retries: 2 }, function () {
             cy.get('#request').click()
             cy.get('#result').should('contain', 'client')
           })
+
+          it('works with reply', () => {
+            cy.intercept({
+              method: 'POST',
+              times: 1,
+              url: '/post-only',
+            },
+            (req) => {
+              req.reply('stubbed data')
+            }).as('interceptor')
+
+            cy.visit('fixtures/request.html')
+
+            cy.get('#request').click()
+            cy.get('#result').should('contain', 'stubbed data')
+
+            cy.get('#request').click()
+            cy.get('#result').should('contain', 'client') // Fail
+          })
         })
       })
     })

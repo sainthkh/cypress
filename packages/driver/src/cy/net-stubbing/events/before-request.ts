@@ -274,6 +274,8 @@ export const onBeforeRequest: HandlerFn<CyHttpMessages.IncomingRequest> = (Cypre
         // `responseHandler` is a StaticResponse
         validateStaticResponse('req.reply', responseHandler)
 
+        responseHandler.cypressInternalResReplyCall = true
+
         sendStaticResponse(requestId, responseHandler)
 
         return updateRequest(req)

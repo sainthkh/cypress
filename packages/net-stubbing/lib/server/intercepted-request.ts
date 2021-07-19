@@ -32,7 +32,7 @@ export class InterceptedRequest {
   /**
    * Finish the current request with a response.
    */
-  _onResponse: (incomingRes: IncomingMessage, resStream: Readable) => void
+  _onResponse: (incomingRes: IncomingMessage, resStream: Readable, cypressInternalResReplyCall?: boolean) => void
   /**
    * A callback that can be used to send the response through the rest of the response proxy steps.
    */
@@ -57,14 +57,14 @@ export class InterceptedRequest {
     this.addDefaultSubscriptions()
   }
 
-  onResponse = (incomingRes: IncomingMessage, resStream: Readable) => {
+  onResponse = (incomingRes: IncomingMessage, resStream: Readable, cypressInternalResReplyCall?: boolean) => {
     if (this.responseSent) {
       throw new Error('onResponse cannot be called twice')
     }
 
     this.responseSent = true
 
-    this._onResponse(incomingRes, resStream)
+    this._onResponse(incomingRes, resStream, cypressInternalResReplyCall)
   }
 
   private addDefaultSubscriptions () {
@@ -184,7 +184,31 @@ export class InterceptedRequest {
           }
         }
 
-        if (eventName === 'before:request') {
+        if (
+          eventName === 'before:request' ||
+          // https://github.com/cypress-io/cypress/issues/17139
+          // This `cypressInternalResReplyCall` came
+          // from driver/src/cy/net-stubbing/events/before-requests.ts
+          // to sendStaticResponse at util.ts
+          // to middleware/request.ts
+          // to middleware/response.ts
+          // to here.
+          //
+          // This is a really ugly solution.
+          // But `cypressInternalResReplyCall` is necessary below because of the 3 reasons.
+          // 1. res.reply() call inside responseHandler inside cy.intercept()
+          // doesn't trigger `before:request` event.
+          // 2. We cannot simply add `before:response` below
+          // because it can cause duplicated counting for the same request
+          // (one for `before:request` and one more for `before:response`)
+          // 3. Blocking `before:response` when `before:request` is called doesn't work
+          // because there are multiple `before:response` events for the same request
+          // when you register several intercepts for a single url.
+          //
+          // Finally, data is cast to `any` below
+          // because it is not a good idea to expose this internal member to the users.
+          ((data as any).cypressInternalResReplyCall && eventName === 'before:response')
+        ) {
           const route = this.matchingRoutes.find(({ id }) => id === routeId) as BackendRoute
 
           route.matches++

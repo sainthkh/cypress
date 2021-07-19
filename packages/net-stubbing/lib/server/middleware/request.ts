@@ -65,7 +65,11 @@ export const InterceptRequest: RequestMiddleware = async function () {
   const request = new InterceptedRequest({
     continueRequest: this.next,
     onError: this.onError,
-    onResponse: (incomingRes, resStream) => {
+    onResponse: (incomingRes, resStream, cypressInternalResReplyCall) => {
+      if (cypressInternalResReplyCall) {
+        this.req.cypressInternalResReplyCall = true
+      }
+
       setDefaultHeaders(this.req, incomingRes)
       this.onResponse(incomingRes, resStream)
     },
